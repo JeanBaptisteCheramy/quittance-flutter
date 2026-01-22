@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quittance_app/components/common/AppBar/AppBar.dart';
+import 'package:quittance_app/components/common/AppBar/CustomAppBar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

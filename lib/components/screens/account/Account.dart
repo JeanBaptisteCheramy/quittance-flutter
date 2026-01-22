@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quittance_app/components/common/AppBar/CustomAppBar.dart';
 
 class AccountScreen extends StatefulWidget{
   @override
@@ -8,6 +9,8 @@ class AccountScreen extends StatefulWidget{
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    return Text('Account page');
+    return Scaffold(
+      appBar: CustomAppBar(showBackButton:true),
+        body: Text('Account page'));
   }
 }

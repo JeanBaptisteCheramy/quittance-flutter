@@ -15,7 +15,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          primary: Color.fromARGB(255, 42, 30, 98),
+          onPrimary: Colors.white,
+          secondary: Color.fromARGB(255, 169, 157, 239),
+          onSecondary: Color.fromARGB(255, 42, 30, 98),
+          tertiary: Color.fromARGB(255, 197, 152, 97),
+
+      )
+      ),
       routerConfig: _router,
     );
   }
