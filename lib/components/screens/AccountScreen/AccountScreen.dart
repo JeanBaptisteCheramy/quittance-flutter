@@ -10,7 +10,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(showBackButton: true, currentRoute: '/account'),
+      appBar: CustomAppBar(title: "Compte", showBackButton: true),
       body: Text('Account page'),
     );
   }

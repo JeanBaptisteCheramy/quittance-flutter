@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title = "Quittance";
+  final String title;
   final bool showBackButton;
-  final String? currentRoute;
 
-  const CustomAppBar({Key? key, this.showBackButton = false, this.currentRoute}) : super(key: key);
+  const CustomAppBar({super.key, this.showBackButton = false, required this.title});
 
   @override
   Widget build(BuildContext context) {
+  final location = GoRouterState.of(context).uri.toString();
 
     return AppBar(
       toolbarHeight: 80,
@@ -31,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        if (currentRoute != '/account')
+        if (!location.startsWith('/AccountScreen'))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 16.0, 0),
             child: IconButton(
@@ -39,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               iconSize: 40,
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
-                context.push('/account');
+                context.push('/AccountScreen');
               },
             ),
           ),
