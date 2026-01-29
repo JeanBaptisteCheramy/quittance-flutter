@@ -71,7 +71,6 @@ class DatabaseHelper {
 
   // CRUD OPERATIONS =========================================================
 
-
   // ==================== INSERT =============================================
 
   Future<int> insertLessor(Map<String, dynamic> lessor) async {
@@ -99,6 +98,11 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getLessors() async {
     final db = await instance.database;
     return await db.query('lessors');
+  }
+
+  Future<List<Map<String, Object?>>> getLessorById(int id) async {
+    final db = await instance.database;
+    return await db.query('lessors', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<List<Map<String, dynamic>>> getTenants() async {
