@@ -42,7 +42,7 @@ final GoRouter _router = GoRouter(
   routes: [
     GoRoute(path: "/", builder: (context, state) => ReceiptsScreen()),
     GoRoute(
-      path: "/AccountScreen",
+      path: "/account",
       builder: (context, state) => AccountScreen(),
     ),
     GoRoute(path: "/tenants", builder: (context, state) => TenantsScreen()),

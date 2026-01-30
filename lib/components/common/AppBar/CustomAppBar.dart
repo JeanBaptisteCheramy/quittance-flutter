@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        if (!location.startsWith('/AccountScreen'))
+        if (!location.startsWith('/account'))
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 16.0, 0),
             child: IconButton(
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               iconSize: 40,
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
-                context.push('/AccountScreen');
+                context.push('/account');
               },
             ),
           ),

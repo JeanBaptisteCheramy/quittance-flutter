@@ -14,9 +14,8 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDB(String filePath) async {
-    final dbPath =
-        await getDatabasesPath(); // Chemin par défaut selon la plateforme
-    final path = join(dbPath, filePath); // join du package path
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, filePath);
 
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
@@ -32,7 +31,7 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-    CREATE TABLE tenants (
+      CREATE TABLE tenants (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         firstname TEXT NOT NULL,
         lastname TEXT NOT NULL,
@@ -41,7 +40,7 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-    CREATE TABLE rentals (
+      CREATE TABLE rentals (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         address TEXT NOT NULL,
         lessor_id INTEGER NOT NULL,
@@ -52,7 +51,7 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-    CREATE TABLE receipts (
+      CREATE TABLE receipts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         rental_id INTEGER NOT NULL,
         date_receipt TEXT NOT NULL,
@@ -69,13 +68,24 @@ class DatabaseHelper {
     ''');
   }
 
-  // CRUD OPERATIONS =========================================================
-
   // ==================== INSERT =============================================
-
   Future<int> insertLessor(Map<String, dynamic> lessor) async {
     final db = await instance.database;
     return await db.insert('lessors', lessor);
+  }
+
+  // ==================== SINGLETON LESSOR ==================================
+  Future<int> saveSingletonLessor(Map<String, dynamic> lessor) async {
+    final db = await instance.database;
+
+    // Force id = 1
+    lessor['id'] = 1;
+
+    return await db.insert(
+      'lessors',
+      lessor,
+      conflictAlgorithm: ConflictAlgorithm.replace, // create or update
+    );
   }
 
   Future<int> insertTenant(Map<String, dynamic> tenant) async {
@@ -94,7 +104,6 @@ class DatabaseHelper {
   }
 
   // ==================== GET ================================================
-
   Future<List<Map<String, dynamic>>> getLessors() async {
     final db = await instance.database;
     return await db.query('lessors');
@@ -121,7 +130,6 @@ class DatabaseHelper {
   }
 
   // ==================== DELETE ============================================
-
   Future<int> deleteLessor(int id) async {
     final db = await instance.database;
     return await db.delete('lessors', where: 'id = ?', whereArgs: [id]);
@@ -142,8 +150,7 @@ class DatabaseHelper {
     return await db.delete('receipts', where: 'id = ?', whereArgs: [id]);
   }
 
-  // ==================== UPDATE =============================================
-
+  // ==================== UPDATE ============================================
   Future<int> updateLessor(int id, Map<String, dynamic> row) async {
     final db = await instance.database;
     return await db.update('lessors', row, where: 'id = ?', whereArgs: [id]);
