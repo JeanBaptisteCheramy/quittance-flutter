@@ -14,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       toolbarHeight: 80,
       backgroundColor: Theme.of(context).colorScheme.primary,
+      automaticallyImplyLeading: false,
       leading: showBackButton
           ? IconButton(
               icon: const Icon(Icons.arrow_back_ios_new, size: 28),
