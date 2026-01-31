@@ -24,19 +24,11 @@ class LessorRepository  {
   }
 
   Future<LessorModel?> getById(int id) async{
-    final result = await _database.getById("lessors", id);
+    final result = await _database.findById("lessors", id);
         if (result.isNotEmpty){
           return LessorModel.fromMap(result.first);
         }
         return null;
   }
-
-  // Future<List<Map<String, Object?>>> getLessorById(int id) async {
-  //   final db = await instance.database;
-  //   return await db.query('lessors', where: 'id = ?', whereArgs: [id]);
-  // }
-
-
-
 
 }
