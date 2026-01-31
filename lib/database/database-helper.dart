@@ -68,116 +68,51 @@ class DatabaseHelper {
     ''');
   }
 
-  // =======================================================================================================================
-  // ==================== GENERIC ==========================================================================================
-  // =======================================================================================================================
+  // ============ INSERT =======================================================
 
-
-  Future<List<Map<String, dynamic>>> findAll(String table) async {
-    final db = await instance.database;
-    return await db.query(table);
-  }
-
-  Future<List<Map<String, Object?>>> getById(String table, int id) async {
-    final db = await instance.database;
-    return await db.query(table, where: 'id = ?', whereArgs: [id]);
-  }
-
-
-  // =======================================================================================================================
-  // ==================== GENERIC ==========================================================================================
-  // =======================================================================================================================
-
-
-
-
-
-  // ==================== INSERT ================================================
-
+  /// Insert en base de donnée
+  /// Retourne l'id de la donnée insérée
   Future<int> insert( String table, Map<String, dynamic> values, { ConflictAlgorithm? conflictAlgorithm}) async {
     final db = await instance.database;
     return await db.insert(table, values, conflictAlgorithm: conflictAlgorithm);
   }
 
-  Future<int> insertTenant(Map<String, dynamic> tenant) async {
+  // ============ FIND ALL =====================================================
+
+  /// Récupération de toutes les row d'une table
+  /// Retourne une liste d'objets du type demandé
+  Future<List<Map<String, dynamic>>> findAll(String table) async {
     final db = await instance.database;
-    return await db.insert('tenants', tenant);
+    return await db.query(table);
   }
 
-  Future<int> insertRental(Map<String, dynamic> rental) async {
+  // ============ FIND BY ID ===================================================
+
+  /// Récupère une row par son id
+  /// Retourne une liste :
+  /// - vide si aucune donnée
+  /// - contenant une seule map sinon
+  Future<List<Map<String, dynamic>>> findById(String table, int id) async {
     final db = await instance.database;
-    return await db.insert('rentals', rental);
+    return await db.query(table, where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> insertReceipt(Map<String, dynamic> receipt) async {
+  // ============ UPDATE =======================================================
+
+  /// Update d'une row à l'id
+  /// Retourne le nombre de row modifiées
+  Future<int> update(String table, Map<String, dynamic> values, int id ) async {
     final db = await instance.database;
-    return await db.insert('receipts', receipt);
+    return await db.update(table, values, where: 'id = ?',whereArgs: [id]);
   }
 
-  // ==================== GET ================================================
+  // ============ DELETE =======================================================
 
-  Future<List<Map<String, dynamic>>> getLessors() async {
+  /// Suppression d'une row
+  /// Retourne le nombre de row supprimées
+  Future<int> delete(String table, int id) async {
     final db = await instance.database;
-    return await db.query('lessors');
+    return await db.delete(table, where: 'id = ?', whereArgs: [id]);
   }
 
-
-
-
-  Future<List<Map<String, dynamic>>> getTenants() async {
-    final db = await instance.database;
-    return await db.query('tenants');
-  }
-
-  Future<List<Map<String, dynamic>>> getRentals() async {
-    final db = await instance.database;
-    return await db.query('rentals');
-  }
-
-  Future<List<Map<String, dynamic>>> getReceipts() async {
-    final db = await instance.database;
-    return await db.query('receipts');
-  }
-
-  // ==================== DELETE ============================================
-  Future<int> deleteLessor(int id) async {
-    final db = await instance.database;
-    return await db.delete('lessors', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> deleteTenant(int id) async {
-    final db = await instance.database;
-    return await db.delete('tenants', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> deleteRental(int id) async {
-    final db = await instance.database;
-    return await db.delete('rentals', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> deleteReceipt(int id) async {
-    final db = await instance.database;
-    return await db.delete('receipts', where: 'id = ?', whereArgs: [id]);
-  }
-
-  // ==================== UPDATE ============================================
-  Future<int> updateLessor(int id, Map<String, dynamic> row) async {
-    final db = await instance.database;
-    return await db.update('lessors', row, where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> updateTenant(int id, Map<String, dynamic> row) async {
-    final db = await instance.database;
-    return await db.update('tenants', row, where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> updateRental(int id, Map<String, dynamic> row) async {
-    final db = await instance.database;
-    return await db.update('rentals', row, where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> updateReceipt(int id, Map<String, dynamic> row) async {
-    final db = await instance.database;
-    return await db.update('receipts', row, where: 'id = ?', whereArgs: [id]);
-  }
 }
