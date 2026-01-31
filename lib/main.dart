@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quittance_app/components/screens/ReceiptsScreen/ReceiptsScreen.dart';
-import 'package:quittance_app/components/screens/RentalsScreen/RentalsScreen.dart';
-import 'package:quittance_app/components/screens/TenantsScreen/TenantsScreen.dart';
+import 'package:quittance_app/components/screens/ReceiptsScreen/receipts_screen.dart';
+import 'package:quittance_app/components/screens/RentalsScreen/rentals_screen.dart';
+import 'package:quittance_app/components/screens/TenantsScreen/tenants_screen.dart';
 
-import 'components/screens/AccountScreen/AccountScreen.dart';
-import 'database/database-helper.dart';
+import 'components/screens/AccountScreen/account_screen.dart';
+import 'database/database_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

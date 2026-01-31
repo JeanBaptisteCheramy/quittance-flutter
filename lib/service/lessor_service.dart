@@ -1,4 +1,4 @@
-import 'package:quittance_app/models/LessorModel.dart';
+import 'package:quittance_app/models/lessor_model.dart';
 import 'package:quittance_app/repository/lessor_repository.dart';
 
 class LessorService {
@@ -12,6 +12,7 @@ class LessorService {
   }
 
   /// Récupérer le lessor par ID
+  ///
   /// [id] === 1 (singleton, un seul propriétaire)
   /// return [LessorModel] ou null
   Future<LessorModel?> getById(int id) {

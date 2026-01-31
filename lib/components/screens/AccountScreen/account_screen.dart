@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quittance_app/components/common/AppBar/CustomAppBar.dart';
+import 'package:quittance_app/components/common/AppBar/custom_app_bar.dart';
 import 'package:quittance_app/main.dart';
-import 'package:quittance_app/models/LessorModel.dart';
-import 'package:quittance_app/service/LessorService.dart';
-import 'package:quittance_app/utils/validators/Validators.dart';
+import 'package:quittance_app/models/lessor_model.dart';
+import 'package:quittance_app/service/lessor_service.dart';
+import 'package:quittance_app/utils/validators/validators.dart';
 
 class AccountScreen extends StatefulWidget {
   final int id = 1;

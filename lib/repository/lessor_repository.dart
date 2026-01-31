@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import '../database/database-helper.dart';
-import '../models/LessorModel.dart';
+import '../database/database_helper.dart';
+import '../models/lessor_model.dart';
 
 class LessorRepository  {
 
