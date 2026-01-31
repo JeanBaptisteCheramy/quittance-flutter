@@ -30,7 +30,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<void> _loadLessor() async {
-    final result = await _service.find(widget.id);
+    final result = await _service.getById(widget.id);
 
     if (result != null) {
       setState(() {

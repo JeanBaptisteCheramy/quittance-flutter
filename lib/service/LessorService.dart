@@ -1,20 +1,20 @@
 import 'package:quittance_app/models/LessorModel.dart';
-import '../database/database-helper.dart';
+import 'package:quittance_app/repository/lessor_repository.dart';
 
 class LessorService {
-  final DatabaseHelper _db = DatabaseHelper.instance;
+  final LessorRepository _repository = LessorRepository();
 
-  // Méthode unique pour créer ou mettre à jour le lessor singleton
+  /// Méthode save pour le lessor
+  /// Pas de return
+  /// Permet de créer / mettre à jour les informations du propriétaire
   Future<void> save(LessorModel lessor) async {
-    await _db.saveSingletonLessor(lessor.toMap());
+    await _repository.saveSingleton(lessor);
   }
 
-  // Récupérer le lessor par ID (toujours 1 pour le singleton)
-  Future<LessorModel?> find(int id) async {
-    final result = await _db.getLessorById(id);
-    if (result.isNotEmpty) {
-      return LessorModel.fromMap(result.first);
-    }
-    return null;
+  /// Récupérer le lessor par ID
+  /// [id] === 1 (singleton, un seul propriétaire)
+  /// return [LessorModel] ou null
+  Future<LessorModel?> getById(int id) {
+    return _repository.getById(id);
   }
 }

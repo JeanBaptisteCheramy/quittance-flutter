@@ -68,24 +68,35 @@ class DatabaseHelper {
     ''');
   }
 
-  // ==================== INSERT =============================================
-  Future<int> insertLessor(Map<String, dynamic> lessor) async {
+  // =======================================================================================================================
+  // ==================== GENERIC ==========================================================================================
+  // =======================================================================================================================
+
+
+  Future<List<Map<String, dynamic>>> findAll(String table) async {
     final db = await instance.database;
-    return await db.insert('lessors', lessor);
+    return await db.query(table);
   }
 
-  // ==================== SINGLETON LESSOR ==================================
-  Future<int> saveSingletonLessor(Map<String, dynamic> lessor) async {
+  Future<List<Map<String, Object?>>> getById(String table, int id) async {
     final db = await instance.database;
+    return await db.query(table, where: 'id = ?', whereArgs: [id]);
+  }
 
-    // Force id = 1
-    lessor['id'] = 1;
 
-    return await db.insert(
-      'lessors',
-      lessor,
-      conflictAlgorithm: ConflictAlgorithm.replace, // create or update
-    );
+  // =======================================================================================================================
+  // ==================== GENERIC ==========================================================================================
+  // =======================================================================================================================
+
+
+
+
+
+  // ==================== INSERT ================================================
+
+  Future<int> insert( String table, Map<String, dynamic> values, { ConflictAlgorithm? conflictAlgorithm}) async {
+    final db = await instance.database;
+    return await db.insert(table, values, conflictAlgorithm: conflictAlgorithm);
   }
 
   Future<int> insertTenant(Map<String, dynamic> tenant) async {
@@ -104,15 +115,14 @@ class DatabaseHelper {
   }
 
   // ==================== GET ================================================
+
   Future<List<Map<String, dynamic>>> getLessors() async {
     final db = await instance.database;
     return await db.query('lessors');
   }
 
-  Future<List<Map<String, Object?>>> getLessorById(int id) async {
-    final db = await instance.database;
-    return await db.query('lessors', where: 'id = ?', whereArgs: [id]);
-  }
+
+
 
   Future<List<Map<String, dynamic>>> getTenants() async {
     final db = await instance.database;
