@@ -15,7 +15,7 @@ class _ReceiptsScreenState extends State<ReceiptsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Quittances"),
+      appBar: CustomAppBar(title: "Quittances", showAccountButton: true),
       floatingActionButton: FloatingActionButton(
         onPressed: isButtonEnabled ? () {} : null,
         backgroundColor: isButtonEnabled

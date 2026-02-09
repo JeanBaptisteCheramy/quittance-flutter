@@ -5,6 +5,7 @@ import 'package:quittance_app/components/screens/RentalsScreen/rentals_screen.da
 import 'package:quittance_app/components/screens/TenantsScreen/tenants_screen.dart';
 
 import 'components/screens/AccountScreen/account_screen.dart';
+import 'components/screens/TenantsScreen/tenant_form.dart';
 import 'database/database_helper.dart';
 
 void main() async {
@@ -30,7 +31,6 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromARGB(255, 169, 157, 239),
           onSecondary: Color.fromARGB(255, 42, 30, 98),
           tertiary: Color.fromARGB(255, 197, 152, 97),
-
         ),
       ),
       routerConfig: _router,
@@ -41,18 +41,19 @@ class MyApp extends StatelessWidget {
 final GoRouter _router = GoRouter(
   routes: [
     GoRoute(path: "/", builder: (context, state) => ReceiptsScreen()),
-    GoRoute(
-      path: "/account",
-      builder: (context, state) => AccountScreen(),
-    ),
+    GoRoute(path: "/account", builder: (context, state) => AccountScreen()),
     GoRoute(path: "/tenants", builder: (context, state) => TenantsScreen()),
     GoRoute(path: "/rentals", builder: (context, state) => RentalsScreen()),
+    GoRoute(path: '/tenantForm', builder: (context, state) => TenantForm()),
   ],
 );
 
 extension CustomColors on ColorScheme {
   Color get disabled => const Color.fromARGB(255, 115, 115, 115);
+
   Color get onDisabled => const Color.fromARGB(255, 204, 204, 204);
+
   Color get validate => const Color.fromARGB(255, 42, 30, 98);
+
   Color get cancel => const Color.fromARGB(255, 165, 57, 57);
 }

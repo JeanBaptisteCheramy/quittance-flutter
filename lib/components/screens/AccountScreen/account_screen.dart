@@ -8,6 +8,8 @@ import 'package:quittance_app/utils/validators/validators.dart';
 class AccountScreen extends StatefulWidget {
   final int id = 1;
 
+  const AccountScreen({super.key});
+
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../common/AppBar/custom_app_bar.dart';
 import '../../common/custom_bottom_navigation.dart';
 

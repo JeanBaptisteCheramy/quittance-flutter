@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
+  final bool showAccountButton;
 
-  const CustomAppBar({super.key, this.showBackButton = false, required this.title});
+  const CustomAppBar({super.key, this.showBackButton = false, this.showAccountButton = false, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        if (!location.startsWith('/account'))
+        if (showAccountButton)
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 16.0, 0),
             child: IconButton(

@@ -1,6 +1,5 @@
 class LessorModel {
   final int? id;
-
   final String lastName;
   final String firstName;
   final String address;
