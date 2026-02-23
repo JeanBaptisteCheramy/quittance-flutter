@@ -49,6 +49,7 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
+
   void _switchUpdateMode() {
     setState(() {
       formMode = !formMode;
