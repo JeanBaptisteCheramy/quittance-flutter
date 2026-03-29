@@ -4,12 +4,12 @@ import 'package:quittance_app/main.dart';
 import '../../common/AppBar/custom_app_bar.dart';
 import '../../common/custom_bottom_navigation.dart';
 
-class ReceiptsScreen extends StatefulWidget {
+class QuittancesScreen extends StatefulWidget {
   @override
-  State<ReceiptsScreen> createState() => _ReceiptsScreenState();
+  State<QuittancesScreen> createState() => _QuittancesScreenState();
 }
 
-class _ReceiptsScreenState extends State<ReceiptsScreen> {
+class _QuittancesScreenState extends State<QuittancesScreen> {
   bool isButtonEnabled = false;
 
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quittance_app/components/screens/ReceiptsScreen/receipts_screen.dart';
+import 'package:quittance_app/components/screens/QuittancesScreen/quittances_screen.dart';
 import 'package:quittance_app/components/screens/RentalsScreen/rentals_screen.dart';
-import 'package:quittance_app/components/screens/TenantsScreen/tenants_screen.dart';
+import 'package:quittance_app/components/screens/RentersScreen/renters_screen.dart';
 
 import 'components/screens/AccountScreen/account_screen.dart';
-import 'components/screens/TenantsScreen/tenant_form.dart';
+import 'components/screens/RentersScreen/renter_form.dart';
 import 'database/database_helper.dart';
 
 void main() async {
@@ -40,11 +40,20 @@ class MyApp extends StatelessWidget {
 
 final GoRouter _router = GoRouter(
   routes: [
-    GoRoute(path: "/", builder: (context, state) => ReceiptsScreen()),
+    GoRoute(path: "/", builder: (context, state) => QuittancesScreen()),
     GoRoute(path: "/account", builder: (context, state) => AccountScreen()),
-    GoRoute(path: "/tenants", builder: (context, state) => TenantsScreen()),
+    GoRoute(path: "/renters", builder: (context, state) => RentersScreen()),
     GoRoute(path: "/rentals", builder: (context, state) => RentalsScreen()),
-    GoRoute(path: '/tenantForm', builder: (context, state) => TenantForm()),
+    GoRoute(path: '/renterForm', builder: (context, state) => RenterForm()),
+    GoRoute(
+      path: '/renterForm/:id?',
+      builder: (context, state) {
+        final idParam = state.pathParameters['id'];
+        final id = idParam != null ? int.tryParse(idParam) : null;
+
+        return RenterForm(id: id);
+      },
+    ),
   ],
 );
 

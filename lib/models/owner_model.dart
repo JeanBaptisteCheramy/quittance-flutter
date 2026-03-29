@@ -1,10 +1,10 @@
-class LessorModel {
+class OwnerModel {
   final int? id;
   final String lastName;
   final String firstName;
   final String address;
 
-  LessorModel({
+  OwnerModel({
     this.id,
     required this.lastName,
     required this.firstName,
@@ -19,8 +19,8 @@ class LessorModel {
     };
   }
 
-  factory LessorModel.fromMap(Map<String, dynamic> map) {
-    return LessorModel(
+  factory OwnerModel.fromMap(Map<String, dynamic> map) {
+    return OwnerModel(
       id: map['id'],
       firstName: map['firstname'],
       lastName: map['lastname'],

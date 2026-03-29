@@ -20,7 +20,7 @@ class _BottomNavigationBarExampleState
         case 1:
           context.go('/rentals');
         case 2:
-          context.go('/tenants');
+          context.go('/renters');
       }
     });
   }
@@ -31,7 +31,7 @@ class _BottomNavigationBarExampleState
 
     int _locationToIndex(String location) {
       if (location.startsWith('/rentals')) return 1;
-      if (location.startsWith('/tenants')) return 2;
+      if (location.startsWith('/renters')) return 2;
       return 0;
     }
 

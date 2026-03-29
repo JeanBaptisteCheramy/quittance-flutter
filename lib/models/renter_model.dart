@@ -1,10 +1,10 @@
-class TenantModel {
+class RenterModel {
   final int? id;
   final String lastName;
   final String firstName;
   final String address;
 
-  TenantModel({
+  RenterModel({
     this.id,
     required this.lastName,
     required this.firstName,
@@ -25,8 +25,8 @@ class TenantModel {
     return map;
   }
 
-  factory TenantModel.fromMap(Map<String, dynamic> map) {
-    return TenantModel(
+  factory RenterModel.fromMap(Map<String, dynamic> map) {
+    return RenterModel(
       id: map['id'] as int?,
       firstName: map['firstname'] as String,
       lastName: map['lastname'] as String,

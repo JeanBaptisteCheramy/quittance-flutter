@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quittance_app/components/common/AppBar/custom_app_bar.dart';
 import 'package:quittance_app/main.dart';
-import 'package:quittance_app/models/lessor_model.dart';
-import 'package:quittance_app/service/lessor_service.dart';
+import 'package:quittance_app/models/owner_model.dart';
+import 'package:quittance_app/service/owner_service.dart';
 import 'package:quittance_app/utils/validators/validators.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  final LessorService _service = LessorService();
+  final OwnerService _service = OwnerService();
   final _formKey = GlobalKey<FormState>();
   bool formMode = false;
 
@@ -23,24 +23,24 @@ class _AccountScreenState extends State<AccountScreen> {
   final _firstNameController = TextEditingController();
   final _addressController = TextEditingController();
 
-  late LessorModel lessor;
+  late OwnerModel owner;
 
   @override
   void initState() {
     super.initState();
-    _loadLessor();
+    _loadOwner();
   }
 
-  Future<void> _loadLessor() async {
+  Future<void> _loadOwner() async {
     final result = await _service.getById(widget.id);
 
     if (result != null) {
       setState(() {
-        lessor = result;
+        owner = result;
         formMode = false; // mode lecture
-        _lastNameController.text = lessor.lastName;
-        _firstNameController.text = lessor.firstName;
-        _addressController.text = lessor.address;
+        _lastNameController.text = owner.lastName;
+        _firstNameController.text = owner.firstName;
+        _addressController.text = owner.address;
       });
     } else {
       setState(() {
@@ -58,7 +58,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   void _onSubmit() async {
     if (_formKey.currentState!.validate()) {
-      final singletonLessor = LessorModel(
+      final singletonOwner = OwnerModel(
         id: 1,
         lastName: _lastNameController.text,
         firstName: _firstNameController.text,
@@ -66,9 +66,9 @@ class _AccountScreenState extends State<AccountScreen> {
       );
 
       // create or update automatiquement
-      await _service.save(singletonLessor);
+      await _service.save(singletonOwner);
 
-      await _loadLessor();
+      await _loadOwner();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -173,9 +173,9 @@ class _AccountScreenState extends State<AccountScreen> {
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _infoRow('Nom', lessor.lastName),
-                      _infoRow('Prénom', lessor.firstName),
-                      _infoRow('Adresse', lessor.address),
+                      _infoRow('Nom', owner.lastName),
+                      _infoRow('Prénom', owner.firstName),
+                      _infoRow('Adresse', owner.address),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                         child: ElevatedButton(

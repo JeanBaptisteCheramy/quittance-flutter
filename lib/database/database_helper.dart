@@ -17,12 +17,20 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path, version: 2, onCreate: _createDB, onUpgrade: _upgradeDB);
+  }
+
+  Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
+    await db.execute('DROP TABLE IF EXISTS receipts');
+    await db.execute('DROP TABLE IF EXISTS rentals');
+    await db.execute('DROP TABLE IF EXISTS tenants');
+    await db.execute('DROP TABLE IF EXISTS lessors');
+    await _createDB(db, newVersion);
   }
 
   Future _createDB(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE lessors (
+      CREATE TABLE owners (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         lastname TEXT NOT NULL,
         firstname TEXT NOT NULL,
@@ -31,7 +39,7 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-      CREATE TABLE tenants (
+      CREATE TABLE renters (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         firstname TEXT NOT NULL,
         lastname TEXT NOT NULL,
@@ -43,18 +51,18 @@ class DatabaseHelper {
       CREATE TABLE rentals (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         address TEXT NOT NULL,
-        lessor_id INTEGER NOT NULL,
-        tenant_id INTEGER NOT NULL,
-        FOREIGN KEY (lessor_id) REFERENCES lessors(id),
-        FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+        owner_id INTEGER NOT NULL,
+        renter_id INTEGER NOT NULL,
+        FOREIGN KEY (owner_id) REFERENCES owners(id),
+        FOREIGN KEY (renter_id) REFERENCES renters(id)
       )
     ''');
 
     await db.execute('''
-      CREATE TABLE receipts (
+      CREATE TABLE quittances (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         rental_id INTEGER NOT NULL,
-        date_receipt TEXT NOT NULL,
+        date_quittance TEXT NOT NULL,
         start_date TEXT NOT NULL,
         end_date TEXT NOT NULL,
         rent REAL NOT NULL,

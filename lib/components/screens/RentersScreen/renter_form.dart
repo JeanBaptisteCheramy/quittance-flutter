@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../main.dart';
-import '../../../models/tenant_model.dart';
-import '../../../service/tenant_service.dart';
+import '../../../models/renter_model.dart';
+import '../../../service/renter_service.dart';
 import '../../../utils/validators/validators.dart';
 import '../../common/AppBar/custom_app_bar.dart';
 
-class TenantForm extends StatefulWidget {
-  const TenantForm({super.key});
+class RenterForm extends StatefulWidget {
+  final int? id;
+  const RenterForm({super.key, this.id});
 
   @override
-  State<TenantForm> createState() => _TenantFormState();
+  State<RenterForm> createState() => _RenterFormState();
 }
 
-class _TenantFormState extends State<TenantForm> {
-  final TenantService _service = TenantService();
+class _RenterFormState extends State<RenterForm> {
+  final RenterService _service = RenterService();
 
   bool formMode = false;
   final _formKey = GlobalKey<FormState>();
@@ -81,7 +82,7 @@ class _TenantFormState extends State<TenantForm> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: _goToTenantsPage,
+                    onPressed: _goToRentersPage,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.cancel,
                     ),
@@ -105,7 +106,7 @@ class _TenantFormState extends State<TenantForm> {
   void _onSubmit() async {
     print(_formKey.currentState);
     if (_formKey.currentState!.validate()) {
-      final newTenant = TenantModel(
+      final newRenter = RenterModel(
         id: null,
         lastName: _lastNameController.text,
         firstName: _firstNameController.text,
@@ -114,7 +115,7 @@ class _TenantFormState extends State<TenantForm> {
 
 
       // create or update automatiquement
-      await _service.save(newTenant);
+      await _service.save(newRenter);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -124,12 +125,12 @@ class _TenantFormState extends State<TenantForm> {
         ),
       );
 
-      _goToTenantsPage();
+      _goToRentersPage();
     }
   }
 
-  void _goToTenantsPage() {
-    context.push("/tenants");
+  void _goToRentersPage() {
+    context.push("/renters");
   }
 
   void _switchUpdateMode() {
