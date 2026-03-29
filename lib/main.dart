@@ -44,13 +44,11 @@ final GoRouter _router = GoRouter(
     GoRoute(path: "/account", builder: (context, state) => AccountScreen()),
     GoRoute(path: "/renters", builder: (context, state) => RentersScreen()),
     GoRoute(path: "/rentals", builder: (context, state) => RentalsScreen()),
-    GoRoute(path: '/renterForm', builder: (context, state) => RenterForm()),
     GoRoute(
-      path: '/renterForm/:id?',
+      path: '/renterForm',
       builder: (context, state) {
-        final idParam = state.pathParameters['id'];
+        final idParam = state.uri.queryParameters['id'];
         final id = idParam != null ? int.tryParse(idParam) : null;
-
         return RenterForm(id: id);
       },
     ),

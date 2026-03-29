@@ -16,4 +16,12 @@ class RenterService {
     return await _repository.getAll();
   }
 
+  Future<RenterModel?> getById(int id) async{
+    return await _repository.getById(id);
+  }
+
+  Future<int> delete(int id) async{
+    return await _repository.delete(id);
+  }
+
 }

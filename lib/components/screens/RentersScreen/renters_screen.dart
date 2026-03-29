@@ -31,6 +31,10 @@ class _RentersScreenState extends State<RentersScreen> {
       });
     }
   }
+  _deleteRenter(int id) async {
+    await _service.delete(id);
+    _loadAllRenters();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +72,14 @@ class _RentersScreenState extends State<RentersScreen> {
                   children: [
                     IconButton(
                       onPressed: () =>
-                          context.push('/renterForm/${renter!.id}'),
+                          context.push('/renterForm?id=${renter!.id}'),
                       icon: Icon(Icons.edit),
                     ),
                     SizedBox(width: 16),
-                    Icon(Icons.delete),
+                    IconButton(
+                      onPressed: () => _deleteRenter(renter!.id!),
+                      icon: Icon(Icons.delete),
+                    ),
                   ],
                 ),
               ),

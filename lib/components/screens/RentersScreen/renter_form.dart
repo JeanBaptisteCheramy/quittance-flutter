@@ -8,6 +8,7 @@ import '../../common/AppBar/custom_app_bar.dart';
 
 class RenterForm extends StatefulWidget {
   final int? id;
+
   const RenterForm({super.key, this.id});
 
   @override
@@ -23,6 +24,25 @@ class _RenterFormState extends State<RenterForm> {
   final _lastNameController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _addressController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.id != null) {
+      _loadRenter(widget.id!);
+    }
+  }
+
+  Future<void> _loadRenter(int id) async {
+    final renter = await _service.getById(id);
+    if (renter != null) {
+      setState(() {
+        _lastNameController.text = renter.lastName;
+        _firstNameController.text = renter.firstName;
+        _addressController.text = renter.address ?? '';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,12 +127,11 @@ class _RenterFormState extends State<RenterForm> {
     print(_formKey.currentState);
     if (_formKey.currentState!.validate()) {
       final newRenter = RenterModel(
-        id: null,
+        id: widget.id,
         lastName: _lastNameController.text,
         firstName: _firstNameController.text,
         address: _addressController.text,
       );
-
 
       // create or update automatiquement
       await _service.save(newRenter);
